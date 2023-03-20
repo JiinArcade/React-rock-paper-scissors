@@ -5,7 +5,7 @@ const Box = (props) => {
   return (
     <div className='Box'>
       <h1>{props.title}</h1>
-      <h2>Rock</h2>
+      <h2>{props.item.name}</h2>
       {/* null 값에서 이미지 안띄어짐,
           해결방법 : 조건부 렌더링 
           유저가 버튼을 클릭했을 때 useState값이 들어오고,
