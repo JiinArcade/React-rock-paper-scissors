@@ -1,14 +1,15 @@
 import logo from './logo.svg';
+import { useState } from 'react';
 import Box from './component/Box';
 import './App.css'
 
 // 객체는 key : value 형태로 작성한다.
 // value로 여러개의 프로퍼티를 가질 수 있다.
 // 프로퍼티 : key : value 쌍
-const choics = {
+const choice = {
   scissors: {
     name: "Scissors",
-    img: "https://t1.daumcdn.net/tistoryfile/fs12/3_tistory_2009_01_12_07_49_496a778f3d93a?original"
+    img: "https://thumb.photo-ac.com/bc/bc0333d139457050e98ccec4e410085a_t.jpeg"
   },
   rock: {
     name: "Rock",
@@ -21,16 +22,31 @@ const choics = {
 }
 
 function App() {
+  const [userSelect, setUserSelect] = useState(null)
+  const [computerSelect, setComputerSelect] = useState(null)
+
+  const play = (userChoice) => {
+    console.log(userChoice, "선택됨!")
+    setUserSelect(choice[userChoice])
+  }
+
+  const randomChoice = () => {
+    
+  }
+  
   return (
     <div className="App">
       <div class="Box-list">
-        <Box title="You"></Box>
+        <Box title="You" item={userSelect}></Box>
         <Box title="Computer"></Box>
       </div>
       <div className='btn-list'>
-        <button>가위</button>
-        <button>바위</button>
-        <button>보</button>
+        {/* play함수한테 매개변수로 값을 전달한다
+            리액트 에서는 play() UI를 그려줄 때 해당 함수를 실행 시킨다.
+            onClick시 실행되게 하고 싶다면 콜백함수 형태로 전달해줘야 한다. */}
+        <button onClick={() => play("scissors")}>가위</button>
+        <button onClick={() => play("rock")}>바위</button>
+        <button onClick={() => play("paper")}>보</button>
       </div>
     </div>
   );
