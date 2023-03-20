@@ -1,11 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 const Box = (props) => {
+  let result;
+  if (
+    props.title === "Computer" &&
+    props.result !== "tie" &&
+    props.result !== ""
+  ) {
+    result = props.result === "win" ? "lose" : "win"
+  }
   console.log(props)
   return (
     <div className='Box'>
       <h1>{props.title}</h1>
-      <h2>{props.item.name}</h2>
+      <h2>{props.item && props.item.name}</h2>
       {/* null 값에서 이미지 안띄어짐,
           해결방법 : 조건부 렌더링 
           유저가 버튼을 클릭했을 때 useState값이 들어오고,
@@ -19,7 +27,7 @@ const Box = (props) => {
           item 값이 null 이라면 false를 리턴하니까 우항이 실행되지 않는다. (렌더링x)
        */}
       <img src={props.item && props.item.img}></img>
-      <h2>Win</h2>
+      <h2>{result}</h2>
     </div>
   )
 }

@@ -18,21 +18,45 @@ const choice = {
   paper: {
     name: "Paper",
     img: "https://src.hidoc.co.kr/image/lib/2020/3/27/1585295218513_0.jpg"
-  }
+  },
 }
 
 function App() {
   const [userSelect, setUserSelect] = useState(null)
   const [computerSelect, setComputerSelect] = useState(null)
+  const [result, setResult] = useState("")
 
   const play = (userChoice) => {
-    // console.log(userChoice, "선택됨!")
+    console.log(userChoice, "선택됨!")
     setUserSelect(choice[userChoice])
     // randomChoice()  --- 잘라냄
 
     // randomChoice()함수를 실행했을 때 결과값
     let computerChoice = randomChoice()
     setComputerSelect(computerChoice)
+
+    // 1. 유저가 선택한 값
+    // 2. 컴퓨터가 선택한 값
+    // 두 값을 judgment 함수에 매개변수로 보내준다.
+    setResult(judgment(choice[userChoice], computerChoice))
+  }
+
+  const judgment = (user, computer) => {
+    // 게임 로직에 대해서 생각 해보기.
+    // 어떻게 user, computer 두 값을 비교할건지?
+    // user.name == computer.name : tie
+    // user.name == "rock", computer.name == "paper": user LOSE / computer WIN
+    // user.name == "rock", computer.name == "scissors": user WIN / computer LOSE
+    // user.name == "scissors", computer.name == "paper": user WIN / computer LOSE
+    // user.name == "scissors", computer.name == "rock": user LOSE / computer WIN
+    // user.name == "paper", computer.name == "rock": user WIN / computer LOSE
+    // user.name == "paper", computer.name == "scissors": user LOSE / computer WIN
+
+    if (user.name === computer.name) {
+      return "tie"
+    } else if (user.name === "rock") return computer.name === "paper" ? "LOSE" : "WIN"
+    else if (user.name === "scissors") return computer.name === "paper" ? "WIN" : "LOSE"
+    else if (user.name === "paper") return computer.name === "rock" ? "WIN" : "LOSE"
   }
 
   const randomChoice = () => {
@@ -56,8 +80,8 @@ function App() {
   return (
     <div className="App">
       <div class="Box-list">
-        <Box title="You" item={userSelect}></Box>
-        <Box title="Computer" item={computerSelect}></Box>
+        <Box title="You" item={userSelect} result={result} />
+        <Box title="Computer" item={computerSelect} result={result} />
       </div>
       <div className='btn-list'>
         {/* play함수한테 매개변수로 값을 전달한다
