@@ -54,9 +54,9 @@ function App() {
 
     if (user.name === computer.name) {
       return "tie"
-    } else if (user.name === "rock") return computer.name === "paper" ? "LOSE" : "WIN"
-    else if (user.name === "scissors") return computer.name === "paper" ? "WIN" : "LOSE"
-    else if (user.name === "paper") return computer.name === "rock" ? "WIN" : "LOSE"
+    } else if (user.name === "Rock") return computer.name === "Scissors" ? "win" : "lose"
+    else if (user.name === "Scissors") return computer.name === "Paper" ? "win" : "lose"
+    else if (user.name === "Paper") return computer.name === "Rock" ? "win" : "lose"
   }
 
   const randomChoice = () => {
@@ -79,7 +79,7 @@ function App() {
 
   return (
     <div className="App">
-      <div class="Box-list">
+      <div className="Box-list">
         <Box title="You" item={userSelect} result={result} />
         <Box title="Computer" item={computerSelect} result={result} />
       </div>

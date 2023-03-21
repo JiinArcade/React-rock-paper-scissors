@@ -3,15 +3,24 @@ import React from 'react'
 const Box = (props) => {
   let result;
   if (
+    // props.title이 "Computer"라면
+    // props.result "tie"가 아닐 경우
+    // props.result가 빈 문자열이 아닌 경우
     props.title === "Computer" &&
     props.result !== "tie" &&
     props.result !== ""
   ) {
+    // result라는 변수한테 값이 "win"이면 "lose"로,
+    // "lose"면 "win"으로 변경한 값을 result에 할당한다.
     result = props.result === "win" ? "lose" : "win"
+  } else {
+    result = props.result
   }
+
+
   console.log(props)
   return (
-    <div className='Box'>
+    <div className={`Box ${result}`}>
       <h1>{props.title}</h1>
       <h2>{props.item && props.item.name}</h2>
       {/* null 값에서 이미지 안띄어짐,
